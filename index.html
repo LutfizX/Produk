@@ -40,6 +40,7 @@
       border-radius: 12px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.4);
       overflow: hidden;
+      z-index: 1;
     }
 
     .section h2 {
@@ -55,7 +56,7 @@
       white-space: pre-wrap;
     }
 
-    /* Bingkai RGB animasi di 4 sisi */
+    /* Efek RGB border */
     .section::before,
     .section::after,
     .section .rgb-left,
@@ -66,7 +67,6 @@
       z-index: 2;
     }
 
-    /* Atas */
     .section::before {
       top: 0;
       left: -100%;
@@ -76,7 +76,6 @@
       animation-delay: 0s;
     }
 
-    /* Bawah */
     .section::after {
       bottom: 0;
       left: -100%;
@@ -86,18 +85,16 @@
       animation-delay: 1s;
     }
 
-    /* Kiri */
     .section .rgb-left {
       top: -100%;
       left: 0;
       width: 4px;
       height: 100%;
-      background: linear-gradient(to bottom, purple, violet);
+      background: linear-gradient(to bottom, blue, violet);
       animation: borderRGBVertical 3s linear infinite;
       animation-delay: 2s;
     }
 
-    /* Kanan */
     .section .rgb-right {
       top: -100%;
       right: 0;
@@ -108,25 +105,41 @@
       animation-delay: 3s;
     }
 
-    /* Animasi horizontal */
     @keyframes borderRGB {
       0% { left: -100%; }
       100% { left: 100%; }
     }
 
-    /* Animasi vertikal */
     @keyframes borderRGBVertical {
       0% { top: -100%; }
       100% { top: 100%; }
     }
 
-    /* Hover effect: garis jadi lebih terang dan cepat */
     .section:hover::before,
     .section:hover::after,
     .section:hover .rgb-left,
     .section:hover .rgb-right {
       animation-duration: 1.5s;
       filter: brightness(1.3);
+    }
+
+    /* Efek Kaca Kinclong */
+    .glass-shine {
+      position: absolute;
+      top: 0;
+      left: -75%;
+      width: 50%;
+      height: 100%;
+      background: linear-gradient(120deg, rgba(255,255,255,0.1), rgba(255,255,255,0.3), rgba(255,255,255,0.1));
+      transform: skewX(-20deg);
+      animation: shine 3s infinite;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    @keyframes shine {
+      0% { left: -75%; }
+      100% { left: 125%; }
     }
 
     .footer {
@@ -139,15 +152,15 @@
 
     .order-button {
       display: flex;
-      justify-content: center;
+      flex-direction: column;
+      align-items: center;
       margin: 30px 0 20px;
+      gap: 15px;
     }
 
     .order-button a {
       display: inline-flex;
       align-items: center;
-      background-color: #25D366;
-      color: white;
       font-size: 18px;
       padding: 12px 25px;
       border-radius: 10px;
@@ -157,8 +170,22 @@
       z-index: 5;
     }
 
-    .order-button a:hover {
+    .order-button .wa-button {
+      background-color: #25D366;
+      color: white;
+    }
+
+    .order-button .wa-button:hover {
       background-color: #1ebe5d;
+    }
+
+    .order-button .logo-button {
+      background-color: #8e44ad;
+      color: white;
+    }
+
+    .order-button .logo-button:hover {
+      background-color: #732d91;
     }
 
     .order-button img {
@@ -180,85 +207,80 @@
 <div class="container">
 
   <div class="section">
-    <h2>BOT PUSHKONTAK</h2>
-    <pre>
-1 HARI = 2K
-5 HARI = 4K
-1 MINGGU = 5K
-3 MINGGU = 10K
-5 MINGGU = 15K
-1 BULAN = 30K
-2 BULAN = 35K
-3 BULAN = 40K
-    </pre>
-    <div class="rgb-left"></div>
-    <div class="rgb-right"></div>
-  </div>
-
-  <div class="section">
-    <h2>BOT BUG</h2>
-    <pre>
-1 HARI = 3K
-5 HARI = 6K
-7 HARI = 10K
-8 HARI = 15K
-10 HARI = 20K
-15 HARI = 30K
-    </pre>
-    <div class="rgb-left"></div>
-    <div class="rgb-right"></div>
-  </div>
-
-  <div class="section">
-    <h2>BOT MD / JAGA GRUP</h2>
-    <pre>
-1 HARI = 2K
+    <h2> SEWA BOT PUSHKONTAK</h2>
+    <pre>1 HARI = 2K
 5 HARI = 4K
 7 HARI = 7K
 8 HARI = 8K
 9 HARI = 9K
 10 HARI = 10K
 11 HARI = 11K
-12 HARI = 12K
-    </pre>
+12 HARI = 12K</pre>
+    <div class="glass-shine"></div>
     <div class="rgb-left"></div>
     <div class="rgb-right"></div>
   </div>
 
   <div class="section">
-    <h2>LIST PANEL 1GB - UNLI</h2>
-    <pre>
-📡 PANEL 1GB = 1K
+    <h2>SEWA BOT BUG</h2>
+    <pre>1 HARI = 3K
+5 HARI = 6K
+7 HARI = 10K
+8 HARI = 15K
+10 HARI = 20K
+15 HARI = 30K</pre>
+    <div class="glass-shine"></div>
+    <div class="rgb-left"></div>
+    <div class="rgb-right"></div>
+  </div>
+
+  <div class="section">
+    <h2>SEWA BOT MD / JAGA GRUB</h2>
+    <pre>1 HARI = 2K
+5 HARI = 4K
+7 HARI = 7K
+8 HARI = 8K
+9 HARI = 9K
+10 HARI = 10K
+11 HARI = 11K
+12 HARI = 12K</pre>
+    <div class="glass-shine"></div>
+    <div class="rgb-left"></div>
+    <div class="rgb-right"></div>
+  </div>
+
+  <div class="section">
+    <h2>LIST PANEL 1GB-UNLI</h2>
+    <pre>📡 PANEL 1GB = 1K
 📡 PANEL 2GB = 2K
 📡 PANEL 3GB = 3K
-📡 PANEL 4GB = 4K
 📡 PANEL 5GB = 5K
-📡 PANEL 6GB = 6K
 📡 PANEL 7GB = 7K
 📡 PANEL 8GB = 8K
 📡 PANEL 9GB = 9K
 📡 PANEL 10GB = 10K
-📡 PANEL UNLI = 11K
-    </pre>
+📡 PANEL UNLI = 12K</pre>
+    <div class="glass-shine"></div>
     <div class="rgb-left"></div>
     <div class="rgb-right"></div>
   </div>
-
+    
   <div class="section">
-    <h2>LOGO AI</h2>
-    <pre>
-LOGO AI CUSTOM NAMA = 2K
+    <h2>ADA LOGO AI JUGA</h2>
+    <pre>LOGO AI CUSTOM NAMA = 2K
 
 LOGO AI CUSTOM NAMA TAMPILAN ESTETIK = 3K
 
-LOGO AI CUSTOM NAMA (BISA REQUEST TEMA) = 5K
-    </pre>
+LOGO AI CUSTOM NAMA (BISA REQUEST TEMA) = 5K</pre>
+    <div class="glass-shine"></div>
     <div class="rgb-left"></div>
     <div class="rgb-right"></div>
   </div>
 
+  <!-- Tombol -->
   <div class="order-button">
-    <a href="https://wa.me/6281330941251" target="_blank" onclick="playSound()">
+    <a href="https://lutfizx.github.io/Jualan/logo.html" class="logo-button" target="_blank" onclick="playSound()">LIST LOGO JB KLIK INI</a>
+    <a href="https://wa.me/6281330941251" class="wa-button" target="_blank" onclick="playSound()">
       <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA" />
       ORDER DISINI
     </a>
@@ -272,14 +294,14 @@ LOGO AI CUSTOM NAMA (BISA REQUEST TEMA) = 5K
 LutfizX © 2025
 </div>
 
-<!-- Audio -->
 <audio id="clickSound" src="https://www.fesliyanstudios.com/play-mp3/387"></audio>
 
 <script>
-  function playSound() {
+function playSound() {
     const audio = document.getElementById('clickSound');
     audio.currentTime = 0;
     audio.play();
+    
   }
 </script>
 
