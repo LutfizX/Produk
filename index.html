@@ -3,307 +3,380 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>LIST PRODUK LUTFIZX - RGB Menyalur</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet" />
+  <title>Lutfizx Store</title>
   <style>
+    * { box-sizing: border-box; }
     body {
       margin: 0;
-      padding: 0;
-      background: linear-gradient(120deg, #1f1c2c, #928dab);
-      color: white;
-      font-family: 'Poppins', sans-serif;
-      overflow-x: hidden;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(120deg, #000010, #0b001c);
+      color: #fff;
+      padding-bottom: 140px;
     }
-
     header {
-      background-color: #222;
-      padding: 15px;
-      text-align: center;
-      font-size: 22px;
-      font-weight: bold;
-      letter-spacing: 1px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-    }
-
-    .container {
+      background: #0d0d2b;
       padding: 20px;
-      max-width: 800px;
-      margin: auto;
-      animation: fadeIn 1s ease-in-out;
-    }
-
-    .section {
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
       position: relative;
-      background-color: rgba(0,0,0,0.4);
-      padding: 15px;
-      margin-bottom: 25px;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
-      overflow: hidden;
-      z-index: 1;
     }
-
-    .section h2 {
+    header img {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      border: 3px solid #00e6b8;
+      box-shadow: 0 0 10px #00e6b8;
+      margin-bottom: 10px;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+      color: #00f7ff;
+      text-shadow: 0 0 10px #00f7ff;
+    }
+    .container {
+      padding: 30px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .product {
+      background: #101020;
+      border-radius: 15px;
+      padding: 20px;
+      border: 2px solid #222;
+      position: relative;
+      transition: transform 0.2s, box-shadow 0.5s;
+      box-shadow: 0 0 10px #00f7ff40;
+      animation: glow 2s infinite alternate;
+    }
+    @keyframes glow {
+      0% { box-shadow: 0 0 10px #00f7ff40; }
+      100% { box-shadow: 0 0 20px #00f7ff; }
+    }
+    .product:hover {
+      transform: scale(1.03);
+    }
+    .product h2 {
       margin-top: 0;
-      font-size: 20px;
-      color: #FFD700;
-      text-align: center;
-      text-shadow: 1px 1px 4px black;
+      font-size: 1.4rem;
+      color: #fffe;
     }
-
-    .section pre {
-      font-size: 16px;
-      white-space: pre-wrap;
+    .product p {
+      color: #ccc;
+      margin: 10px 0;
     }
-
-    /* Efek RGB border */
-    .section::before,
-    .section::after,
-    .section .rgb-left,
-    .section .rgb-right {
-      position: absolute;
-      background: linear-gradient(to right, blue, violet);
-      content: '';
-      z-index: 2;
+    .product button {
+      background: #00e6b8;
+      padding: 10px 20px;
+      color: #000;
+      font-weight: bold;
+      border-radius: 10px;
+      cursor: pointer;
+      border: none;
     }
-
-    .section::before {
+    .product button.added {
+      background: #1aff1a;
+    }
+    .product button.added::after {
+      content: "\2714 Produk sudah di keranjang";
+      display: block;
+      color: #adffad;
+      font-size: 0.85rem;
+      margin-top: 5px;
+    }
+    #cartBtn {
+      position: fixed;
+      bottom: 90px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      background: #00e6b8;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      color: #000;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 0 10px #00e6b8;
+      z-index: 999;
+      transition: transform 0.3s;
+    }
+    #cartBtn.shake {
+      animation: shake 0.5s;
+    }
+    @keyframes shake {
+      0% { transform: translate(0, 0); }
+      25% { transform: translate(-5px, -5px); }
+      50% { transform: translate(5px, 5px); }
+      75% { transform: translate(-5px, 5px); }
+      100% { transform: translate(0, 0); }
+    }
+    #cartPopup {
+      position: fixed;
       top: 0;
-      left: -100%;
-      width: 100%;
-      height: 4px;
-      animation: borderRGB 3s linear infinite;
-      animation-delay: 0s;
-    }
-
-    .section::after {
-      bottom: 0;
-      left: -100%;
-      width: 100%;
-      height: 4px;
-      animation: borderRGB 3s linear infinite;
-      animation-delay: 1s;
-    }
-
-    .section .rgb-left {
-      top: -100%;
       left: 0;
-      width: 4px;
+      width: 100%;
       height: 100%;
-      background: linear-gradient(to bottom, blue, violet);
-      animation: borderRGBVertical 3s linear infinite;
-      animation-delay: 2s;
+      background: #0d0d1d;
+      padding: 20px;
+      display: none;
+      z-index: 9999;
     }
-
-    .section .rgb-right {
-      top: -100%;
-      right: 0;
-      width: 4px;
-      height: 100%;
-      background: linear-gradient(to bottom, blue, violet);
-      animation: borderRGBVertical 3s linear infinite;
-      animation-delay: 3s;
+    #cartPopup h3 {
+      margin-top: 30px;
     }
-
-    @keyframes borderRGB {
-      0% { left: -100%; }
-      100% { left: 100%; }
+    .cartItem {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      border-bottom: 1px solid #333;
+      padding-bottom: 5px;
     }
-
-    @keyframes borderRGBVertical {
-      0% { top: -100%; }
-      100% { top: 100%; }
+    .cartItem button {
+      background: red;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 5px;
+      cursor: pointer;
     }
-
-    .section:hover::before,
-    .section:hover::after,
-    .section:hover .rgb-left,
-    .section:hover .rgb-right {
-      animation-duration: 1.5s;
-      filter: brightness(1.3);
-    }
-
-    /* Efek Kaca Kinclong */
-    .glass-shine {
-      position: absolute;
-      top: 0;
-      left: -75%;
-      width: 50%;
-      height: 100%;
-      background: linear-gradient(120deg, rgba(255,255,255,0.1), rgba(255,255,255,0.3), rgba(255,255,255,0.1));
-      transform: skewX(-20deg);
-      animation: shine 3s infinite;
-      z-index: 3;
-      pointer-events: none;
-    }
-
-    @keyframes shine {
-      0% { left: -75%; }
-      100% { left: 125%; }
-    }
-
-    .footer {
-      text-align: center;
-      font-size: 16px;
-      color: #bbb;
+    #checkoutBtn, #qrisBtn, #verifyBtn {
+      background: #00e6b8;
+      border: none;
+      width: 100%;
       padding: 15px;
-      margin-top: 20px;
+      border-radius: 8px;
+      font-weight: bold;
+      color: #000;
+      cursor: pointer;
+      font-size: 1.1rem;
+      margin-top: 10px;
     }
-
-    .order-button {
+    #closeCart, #closeQris {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: red;
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 35px;
+      height: 35px;
+      font-size: 16px;
+      cursor: pointer;
+      z-index: 10001;
+    }
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      background: #101020;
+      padding: 10px 0;
+      border-top: 2px solid #333;
+      z-index: 999;
+    }
+    .bottom-nav div {
       display: flex;
       flex-direction: column;
       align-items: center;
-      margin: 30px 0 20px;
-      gap: 15px;
+      color: #fff;
+      font-size: 0.85rem;
+      cursor: pointer;
     }
-
-    .order-button a {
-      display: inline-flex;
+    .bottom-nav div:hover {
+      color: #00e6b8;
+    }
+    #qrisPopup {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.8);
+      z-index: 10000;
+      justify-content: center;
       align-items: center;
-      font-size: 18px;
-      padding: 12px 25px;
-      border-radius: 10px;
-      text-decoration: none;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-      transition: background 0.3s ease;
-      z-index: 5;
+      flex-direction: column;
     }
-
-    .order-button .wa-button {
-      background-color: #25D366;
-      color: white;
-    }
-
-    .order-button .wa-button:hover {
-      background-color: #1ebe5d;
-    }
-
-    .order-button .logo-button {
-      background-color: #8e44ad;
-      color: white;
-    }
-
-    .order-button .logo-button:hover {
-      background-color: #732d91;
-    }
-
-    .order-button img {
-      width: 24px;
-      height: 24px;
-      margin-right: 10px;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(15px); }
-      to { opacity: 1; transform: translateY(0); }
+    #qrisPopup img {
+      max-width: 90%;
+      border-radius: 12px;
+      box-shadow: 0 0 20px #fff;
     }
   </style>
 </head>
 <body>
-
-<header>📢 LIST PRODUK LUTFIZX 📢</header>
-
-<div class="container">
-
-  <div class="section">
-    <h2> SEWA BOT PUSHKONTAK</h2>
-    <pre>1 HARI = 2K
-5 HARI = 4K
-7 HARI = 7K
-8 HARI = 8K
-9 HARI = 9K
-10 HARI = 10K
-11 HARI = 11K
-12 HARI = 12K</pre>
-    <div class="glass-shine"></div>
-    <div class="rgb-left"></div>
-    <div class="rgb-right"></div>
-  </div>
-
-  <div class="section">
-    <h2>SEWA BOT BUG</h2>
-    <pre>1 HARI = 3K
-5 HARI = 6K
-7 HARI = 10K
-8 HARI = 15K
-10 HARI = 20K
-15 HARI = 30K</pre>
-    <div class="glass-shine"></div>
-    <div class="rgb-left"></div>
-    <div class="rgb-right"></div>
-  </div>
-
-  <div class="section">
-    <h2>SEWA BOT MD / JAGA GRUB</h2>
-    <pre>1 HARI = 2K
-5 HARI = 4K
-7 HARI = 7K
-8 HARI = 8K
-9 HARI = 9K
-10 HARI = 10K
-11 HARI = 11K
-12 HARI = 12K</pre>
-    <div class="glass-shine"></div>
-    <div class="rgb-left"></div>
-    <div class="rgb-right"></div>
-  </div>
-
-  <div class="section">
-    <h2>LIST PANEL 1GB-UNLI</h2>
-    <pre>📡 PANEL 1GB = 1K
-📡 PANEL 2GB = 2K
-📡 PANEL 3GB = 3K
-📡 PANEL 5GB = 5K
-📡 PANEL 7GB = 7K
-📡 PANEL 8GB = 8K
-📡 PANEL 9GB = 9K
-📡 PANEL 10GB = 10K
-📡 PANEL UNLI = 12K</pre>
-    <div class="glass-shine"></div>
-    <div class="rgb-left"></div>
-    <div class="rgb-right"></div>
-  </div>
-    
-  <div class="section">
-    <h2>ADA LOGO AI JUGA</h2>
-    <pre>LOGO AI CUSTOM NAMA = 2K
-
-LOGO AI CUSTOM NAMA TAMPILAN ESTETIK = 3K
-
-LOGO AI CUSTOM NAMA (BISA REQUEST TEMA) = 5K</pre>
-    <div class="glass-shine"></div>
-    <div class="rgb-left"></div>
-    <div class="rgb-right"></div>
-  </div>
-
-  <!-- Tombol -->
-  <div class="order-button">
-    <a href="https://lutfizx.github.io/Jualan/logo.html" class="logo-button" target="_blank" onclick="playSound()">LIST LOGO JB KLIK INI</a>
-    <a href="https://wa.me/6281330941251" class="wa-button" target="_blank" onclick="playSound()">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WA" />
-      ORDER DISINI
-    </a>
-  </div>
-
+<audio id="clickSound" src="https://files.catbox.moe/lax7ur.mp3"></audio>
+<header>
+  <img src="https://files.catbox.moe/v3ufm5.jpeg" alt="Logo" />
+  <h1>Lutfizx Store</h1>
+</header>
+<div class="container" id="productList"></div>
+<button id="cartBtn">🛒 <span id="cartCount"></span></button>
+<div id="cartPopup">
+  <button id="closeCart">✖</button>
+  <h3>Keranjang</h3>
+  <div id="cartItems"></div>
+  <button id="checkoutBtn">Beli Sekarang</button>
+  <button id="qrisBtn">Bayar via QRIS</button>
 </div>
-
-<div class="footer">
-█░ █░█ ▀█▀ █▀ █ ▀█ ▀▄▀<br />
-█▄ █▄█ ░█░ █▀ █ █▄ █░█<br />
-LutfizX © 2025
+<div class="bottom-nav">
+  <div onclick="showCategory('panel')">⚙️<span>Panel Run Bot</span></div>
+  <div onclick="showCategory('web')">🌐<span>Buat Web</span></div>
+  <div onclick="showCategory('script')">🤖<span>Script Bot</span></div>
 </div>
-
-<audio id="clickSound" src="https://www.fesliyanstudios.com/play-mp3/387"></audio>
+<div id="qrisPopup">
+  <button id="closeQris">✖</button>
+  <img src="https://img1.pixhost.to/images/6392/609657083_kremonhost.jpg" alt="QRIS">
+  <button id="verifyBtn">✅ Saya sudah bayar</button>
+</div>
 
 <script>
-function playSound() {
-    const audio = document.getElementById('clickSound');
-    audio.currentTime = 0;
-    audio.play();
-    
-  }
-</script>
+const sound = document.getElementById('clickSound');
+const container = document.getElementById('productList');
+const cart = [];
+const cartCount = document.getElementById('cartCount');
 
+const categories = {
+  panel: [
+    { name: 'Panel 1GB', desc: 'Harga: 1K' },
+        { name: 'Panel 2GB', desc: 'Harga: 2K' },
+        { name: 'Panel 3GB', desc: 'Harga: 3K' },
+        { name: 'Panel 4GB', desc: 'Harga: 4K' },
+        { name: 'Panel 5GB', desc: 'Harga: 5K' },
+        { name: 'Panel 6GB', desc: 'Harga: 6K' },
+        { name: 'Panel 7GB', desc: 'Harga: 7K' },
+        { name: 'Panel 8GB', desc: 'Harga: 8K' },
+        { name: 'Panel 9GB', desc: 'Harga: 9K' },
+        { name: 'Panel 10GB', desc: 'Harga: 10K' },
+        { name: 'Panel UNLI', desc: 'Harga: 11K' },
+        { name: 'Reseller Panel', desc: 'Harga: 8K Keuntungan tanya owner' },
+        { name: 'Admin Panel', desc: 'Harga: 15K Keuntungan tanya owner' },
+        { name: 'Partner Panel', desc: 'Harga: 20K Keuntungan tanya owner' },
+        { name: 'Tangan kanan Panel', desc: 'Harga: 30K Keuntungan tanya owner' },
+      ],
+      web: [
+        { name: 'Web Produk List', desc: 'Harga: 10K' },
+        { name: 'Landing Page Premium', desc: 'Harga: 10K' },
+        { name: 'Web Untuk Logo jb', desc: 'Harga: 10K' },
+      ],
+      script: [
+        { name: 'Script Bot WA 500+ fitur', desc: 'Full pairing, maker, grup' },
+        { name: 'Bot LutfizX-Crash', desc: 'Harga: 15K' },
+        { name: 'Bit Pushkontak', desc: 'Harga 7K kualitas terjamin' },
+        { name: 'Sc AmbaCrash', desc: 'Harga: 13K' }
+  ],
+  web: [
+    { name: 'Web Produk List', desc: 'Harga: 10K' },
+    { name: 'Landing Page Premium', desc: 'Harga: 10K' },
+    { name: 'Web untuk logo jb', desc: 'Harga: 7K' }
+  ],
+  script: [
+    { name: 'Script Bot WA 500+ fitur', desc: 'Full pairing, maker, grup' },
+    { name: 'Bot LutfizX-Crash', desc: 'Harga: 15K' },
+    { name: 'Bot pushkontak', desc: 'Harga: 13K' },
+    { name: 'Bot Amba-Crash', desc: 'Harga: 15K' }
+  ]
+};
+
+function playSound() { sound.play(); }
+
+function showCategory(cat) {
+  container.innerHTML = '';
+  categories[cat].forEach(p => {
+    const el = createProductElement(p);
+    container.appendChild(el);
+  });
+}
+
+function showAllProducts() {
+  container.innerHTML = '';
+  Object.values(categories).flat().forEach(p => {
+    const el = createProductElement(p);
+    container.appendChild(el);
+  });
+}
+
+function createProductElement(p) {
+  const el = document.createElement('div');
+  el.className = 'product';
+  el.innerHTML = `<h2>${p.name}</h2><p>${p.desc}</p><button onclick="addToCart(this, '${p.name}')">Beli Sekarang</button>`;
+  return el;
+}
+
+function addToCart(btn, name) {
+  playSound();
+  cart.push(name);
+  btn.classList.add('added');
+  btn.disabled = true;
+  updateCartCount();
+  document.getElementById('cartBtn').classList.add('shake');
+  setTimeout(() => document.getElementById('cartBtn').classList.remove('shake'), 500);
+}
+
+function updateCartCount() {
+  cartCount.innerText = cart.length ? cart.length : '';
+}
+
+document.getElementById('cartBtn').onclick = () => {
+  playSound();
+  renderCart();
+  document.getElementById('cartPopup').style.display = 'block';
+};
+
+document.getElementById('closeCart').onclick = () => {
+  playSound();
+  document.getElementById('cartPopup').style.display = 'none';
+};
+
+function renderCart() {
+  const list = cart.map((item, i) =>
+    `<div class='cartItem'>${i + 1}. ${item} <button onclick='removeItem(${i}, "${item}")'>X</button></div>`
+  ).join('');
+  document.getElementById('cartItems').innerHTML = list || 'Keranjang kosong';
+}
+
+function removeItem(index, name) {
+  cart.splice(index, 1);
+  renderCart();
+  updateCartCount();
+
+  const buttons = document.querySelectorAll('.product button');
+  buttons.forEach(btn => {
+    if (btn.innerText.includes("Produk sudah") || btn.classList.contains('added')) {
+      if (btn.parentElement.querySelector('h2').innerText === name) {
+        btn.classList.remove('added');
+        btn.disabled = false;
+        btn.innerText = "Beli Sekarang";
+      }
+    }
+  });
+}
+
+document.getElementById('checkoutBtn').onclick = () => {
+  if (cart.length === 0) return alert('Keranjang kosong.');
+  const message = encodeURIComponent(`Hai, saya ingin membeli:\n${cart.map((c, i) => `${i + 1}. ${c}`).join('\n')}`);
+  window.open(`https://wa.me/6281330941251?text=${message}`);
+};
+
+document.getElementById('qrisBtn').onclick = () => {
+  document.getElementById('qrisPopup').style.display = 'flex';
+};
+
+document.getElementById('verifyBtn').onclick = () => {
+  const message = encodeURIComponent(`Hai saya sudah membayar pesanan:\n${cart.map((c, i) => `${i + 1}. ${c}`).join('\n')}\nMohon konfirmasi produk nya.`);
+  window.open(`https://wa.me/6281330941251?text=${message}`);
+};
+
+document.getElementById('closeQris').onclick = () => {
+  document.getElementById('qrisPopup').style.display = 'none';
+};
+
+showAllProducts();
+</script>
 </body>
 </html>
